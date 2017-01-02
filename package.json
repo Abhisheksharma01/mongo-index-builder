@@ -1,0 +1,67 @@
+{
+  "name": "mongo-index-builder",
+  "version": "1.0.0",
+  "author": "Abhishek Sharma <abhishek.1196@gmail.com>",
+  "description": "This tool will help in syncronizing mongo db indexes.This is only applicable for standalone servers or replica sets.",
+  "distDir": "dist",
+  "srcDir": "lib",
+  "testDist": "test",
+  "testSrc": "test-lib",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "grunt build",
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=4.6.0"
+  },
+  "keywords": [
+    "sync",
+    "synchronization",
+    "index",
+    "mongodb",
+    "mongo",
+    "index creator"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^7.1.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-register": "^6.18.0",
+    "code": "^4.0.0",
+    "eslint": "^3.9.1",
+    "eslint-cli": "^1.1.0",
+    "eslint-stylish-config": "0.0.2",
+    "grunt": "^1.0.1",
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-eslint": "^19.0.0",
+    "grunt-shell": "^2.0.0",
+    "lab": "^11.1.0",
+    "load-grunt-tasks": "^3.5.2",
+    "mockgo": "^1.1.6",
+    "sinon": "^1.17.6",
+    "sinon-as-promised": "^4.0.2",
+    "source-map-support": "^0.4.0",
+    "time-grunt": "^1.4.0",
+    "uuid": "^3.0.1"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.5",
+    "hoek": "^4.1.0",
+    "joi": "^9.2.0",
+    "mongodb": "^2.2.16",
+    "q": "^1.4.1"
+  }
+}
