@@ -1,0 +1,19 @@
+{
+  "presets": ["es2015"],
+  "sourceMaps": "both",
+
+  "ast": false,
+  "comments": true,
+  "minified": false
+
+  /*
+  It would be great to have this turned on BUT as we are using ES6 import/export
+  rather than module.exports/require this seems to stop the Lab coverage from
+  following into any module that isn't explicitly tested.
+
+  Changing everything would be a very big deal at this stage.
+
+  "auxiliaryCommentBefore": "$lab:coverage:off$",
+  "auxiliaryCommentAfter": "$lab:coverage:on$"
+  */
+}
