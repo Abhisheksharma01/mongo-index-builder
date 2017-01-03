@@ -12,6 +12,11 @@
    So this utility will help in making compatible indexes as part of the application deployment.And Hence 
    will facilitate the rollback or any build deployment without worrying for the compatible indexes.
 
+
+## How to use it
+
+Soon to be added
+
 ## Various components
   - The utility exposes a class "indexBuilderService" which would take in the mongo config and logger config for 
   its construction. And would provide the following :
