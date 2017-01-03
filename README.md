@@ -1,5 +1,7 @@
 # Index Builder
 
+[![Build Status](https://travis-ci.org/Abhisheksharma01/mongo-index-builder.svg?branch=master)](https://travis-ci.org/Abhisheksharma01/mongo-index-builder)
+
 ## Problem Statement
 
    The indexes are build separately from the consumer applications and so far the compatibility of indexes with it has been managed manually.
