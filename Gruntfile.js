@@ -66,6 +66,9 @@ module.exports = function (grunt) {
       "lab": {
         "command": "./node_modules/.bin/lab --verbose --colors -r console -o stdout -r html -o coverage.html '<%= appConfig.testDist %>'"
       },
+      "labCoveralls": {
+        "command": "./node_modules/.bin/lab -r lcov '<%= appConfig.testDist %>' | node_modules/.bin/coveralls"
+      },
       "labquick": {
         "command": "./node_modules/.bin/lab --colors '<%= appConfig.testDist %>'"
       },
@@ -95,7 +98,7 @@ module.exports = function (grunt) {
   grunt.registerTask("test", [
     "build",
     "babel:test",
-    "shell:lab"
+    "shell:labCoveralls"
   ]);
 
   grunt.registerTask("testLocal", [
