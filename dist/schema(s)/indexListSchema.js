@@ -1,0 +1,43 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.indexListSchema = undefined;
+
+var _joi = require("joi");
+
+var Joi = _interopRequireWildcard(_joi);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var indexListSchema = exports.indexListSchema = Joi.array().items(Joi.object().keys({
+  "collectionName": Joi.string().required(),
+  "indexName": Joi.string(),
+  "indexOptions": Joi.object().keys({
+    "w": Joi.string().description("The write concern"),
+    "wtimeout": Joi.number().description("The write concern timeout"),
+    "j": Joi.boolean().description("Specify a journal write concern"),
+    "unique": Joi.boolean().description("Creates an unique index"),
+    "sparse": Joi.boolean().description("Creates a sparse index"),
+    "background": Joi.boolean().description("Creates the index in the background, yielding whenever possible"),
+    "dropDups": Joi.boolean().description("A unique index cannot be created on a key that has pre-existing duplicate values. If you would like to create the index anyway, keeping the first document the database indexes and deleting all subsequent documents that have duplicate value"),
+    "min": Joi.number().description("For geospatial indexes set the lower bound for the co-ordinates"),
+    "max": Joi.number().description("For geospatial indexes set the high bound for the co-ordinates"),
+    "v": Joi.number().description("Specify the format version of the indexes"),
+    "expireAfterSeconds": Joi.number().description("Allows you to expire data on indexes applied to a data (MongoDB 2.2 or higher)")
+  }),
+  "indexKeys": Joi.array().max(31).items(Joi.object().keys({
+    "keyName": Joi.string().required(),
+    "keySortOrder": Joi.number().valid(1, -1),
+    "keyType": Joi.string().valid("text", "2d", "2dsphere", "geoHaystack", "hashed")
+  }).xor("keySortOrder", "keyType").required()).required()
+})).example([{
+  "collectionName": "dashboardAvailabilities",
+  "indexKeys": [{
+    "keyName": "propertyId",
+    "keySortOrder": 1
+  }]
+}]);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL2xpYi9zY2hlbWEocykvaW5kZXhMaXN0U2NoZW1hLmVzNiJdLCJuYW1lcyI6WyJKb2kiLCJpbmRleExpc3RTY2hlbWEiLCJhcnJheSIsIml0ZW1zIiwib2JqZWN0Iiwia2V5cyIsInN0cmluZyIsInJlcXVpcmVkIiwiZGVzY3JpcHRpb24iLCJudW1iZXIiLCJib29sZWFuIiwibWF4IiwidmFsaWQiLCJ4b3IiLCJleGFtcGxlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUE7O0lBQVlBLEc7Ozs7QUFFTCxJQUFNQyw0Q0FBa0JELElBQUlFLEtBQUosR0FBWUMsS0FBWixDQUM1QkgsSUFBSUksTUFBSixHQUFhQyxJQUFiLENBQWtCO0FBQ2hCLG9CQUFrQkwsSUFBSU0sTUFBSixHQUFhQyxRQUFiLEVBREY7QUFFaEIsZUFBYVAsSUFBSU0sTUFBSixFQUZHO0FBR2hCLGtCQUFnQk4sSUFBSUksTUFBSixHQUFhQyxJQUFiLENBQWtCO0FBQ2hDLFNBQUtMLElBQUlNLE1BQUosR0FBYUUsV0FBYixDQUF5QixtQkFBekIsQ0FEMkI7QUFFaEMsZ0JBQVlSLElBQUlTLE1BQUosR0FBYUQsV0FBYixDQUF5QiwyQkFBekIsQ0FGb0I7QUFHaEMsU0FBS1IsSUFBSVUsT0FBSixHQUFjRixXQUFkLENBQTBCLGlDQUExQixDQUgyQjtBQUloQyxjQUFVUixJQUFJVSxPQUFKLEdBQWNGLFdBQWQsQ0FBMEIseUJBQTFCLENBSnNCO0FBS2hDLGNBQVVSLElBQUlVLE9BQUosR0FBY0YsV0FBZCxDQUEwQix3QkFBMUIsQ0FMc0I7QUFNaEMsa0JBQWNSLElBQUlVLE9BQUosR0FBY0YsV0FBZCxDQUEwQixpRUFBMUIsQ0FOa0I7QUFPaEMsZ0JBQVlSLElBQUlVLE9BQUosR0FBY0YsV0FBZCxDQUEwQixpUEFBMUIsQ0FQb0I7QUFRaEMsV0FBT1IsSUFBSVMsTUFBSixHQUFhRCxXQUFiLENBQXlCLGlFQUF6QixDQVJ5QjtBQVNoQyxXQUFPUixJQUFJUyxNQUFKLEdBQWFELFdBQWIsQ0FBeUIsZ0VBQXpCLENBVHlCO0FBVWhDLFNBQUtSLElBQUlTLE1BQUosR0FBYUQsV0FBYixDQUF5QiwyQ0FBekIsQ0FWMkI7QUFXaEMsMEJBQXNCUixJQUFJUyxNQUFKLEdBQWFELFdBQWIsQ0FBeUIsZ0ZBQXpCO0FBWFUsR0FBbEIsQ0FIQTtBQWdCaEIsZUFBYVIsSUFBSUUsS0FBSixHQUFZUyxHQUFaLENBQWdCLEVBQWhCLEVBQW9CUixLQUFwQixDQUNYSCxJQUFJSSxNQUFKLEdBQWFDLElBQWIsQ0FBa0I7QUFDaEIsZUFBV0wsSUFBSU0sTUFBSixHQUFhQyxRQUFiLEVBREs7QUFFaEIsb0JBQWdCUCxJQUFJUyxNQUFKLEdBQWFHLEtBQWIsQ0FBbUIsQ0FBbkIsRUFBc0IsQ0FBQyxDQUF2QixDQUZBO0FBR2hCLGVBQVdaLElBQUlNLE1BQUosR0FBYU0sS0FBYixDQUFtQixNQUFuQixFQUEyQixJQUEzQixFQUFpQyxVQUFqQyxFQUE2QyxhQUE3QyxFQUE0RCxRQUE1RDtBQUhLLEdBQWxCLEVBSUdDLEdBSkgsQ0FJTyxjQUpQLEVBSXVCLFNBSnZCLEVBSWtDTixRQUpsQyxFQURXLEVBTVhBLFFBTlc7QUFoQkcsQ0FBbEIsQ0FENEIsRUEwQjVCTyxPQTFCNEIsQ0EwQnBCLENBQUM7QUFDUixvQkFBa0IseUJBRFY7QUFFUixlQUFhLENBQUM7QUFDWixlQUFXLFlBREM7QUFFWixvQkFBZ0I7QUFGSixHQUFEO0FBRkwsQ0FBRCxDQTFCb0IsQ0FBeEIiLCJmaWxlIjoiaW5kZXhMaXN0U2NoZW1hLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICogYXMgSm9pIGZyb20gXCJqb2lcIjtcblxuZXhwb3J0IGNvbnN0IGluZGV4TGlzdFNjaGVtYSA9IEpvaS5hcnJheSgpLml0ZW1zKFxuICAgSm9pLm9iamVjdCgpLmtleXMoe1xuICAgICBcImNvbGxlY3Rpb25OYW1lXCI6IEpvaS5zdHJpbmcoKS5yZXF1aXJlZCgpLFxuICAgICBcImluZGV4TmFtZVwiOiBKb2kuc3RyaW5nKCksXG4gICAgIFwiaW5kZXhPcHRpb25zXCI6IEpvaS5vYmplY3QoKS5rZXlzKHtcbiAgICAgICBcIndcIjogSm9pLnN0cmluZygpLmRlc2NyaXB0aW9uKFwiVGhlIHdyaXRlIGNvbmNlcm5cIiksXG4gICAgICAgXCJ3dGltZW91dFwiOiBKb2kubnVtYmVyKCkuZGVzY3JpcHRpb24oXCJUaGUgd3JpdGUgY29uY2VybiB0aW1lb3V0XCIpLFxuICAgICAgIFwialwiOiBKb2kuYm9vbGVhbigpLmRlc2NyaXB0aW9uKFwiU3BlY2lmeSBhIGpvdXJuYWwgd3JpdGUgY29uY2VyblwiKSxcbiAgICAgICBcInVuaXF1ZVwiOiBKb2kuYm9vbGVhbigpLmRlc2NyaXB0aW9uKFwiQ3JlYXRlcyBhbiB1bmlxdWUgaW5kZXhcIiksXG4gICAgICAgXCJzcGFyc2VcIjogSm9pLmJvb2xlYW4oKS5kZXNjcmlwdGlvbihcIkNyZWF0ZXMgYSBzcGFyc2UgaW5kZXhcIiksXG4gICAgICAgXCJiYWNrZ3JvdW5kXCI6IEpvaS5ib29sZWFuKCkuZGVzY3JpcHRpb24oXCJDcmVhdGVzIHRoZSBpbmRleCBpbiB0aGUgYmFja2dyb3VuZCwgeWllbGRpbmcgd2hlbmV2ZXIgcG9zc2libGVcIiksXG4gICAgICAgXCJkcm9wRHVwc1wiOiBKb2kuYm9vbGVhbigpLmRlc2NyaXB0aW9uKFwiQSB1bmlxdWUgaW5kZXggY2Fubm90IGJlIGNyZWF0ZWQgb24gYSBrZXkgdGhhdCBoYXMgcHJlLWV4aXN0aW5nIGR1cGxpY2F0ZSB2YWx1ZXMuIElmIHlvdSB3b3VsZCBsaWtlIHRvIGNyZWF0ZSB0aGUgaW5kZXggYW55d2F5LCBrZWVwaW5nIHRoZSBmaXJzdCBkb2N1bWVudCB0aGUgZGF0YWJhc2UgaW5kZXhlcyBhbmQgZGVsZXRpbmcgYWxsIHN1YnNlcXVlbnQgZG9jdW1lbnRzIHRoYXQgaGF2ZSBkdXBsaWNhdGUgdmFsdWVcIiksXG4gICAgICAgXCJtaW5cIjogSm9pLm51bWJlcigpLmRlc2NyaXB0aW9uKFwiRm9yIGdlb3NwYXRpYWwgaW5kZXhlcyBzZXQgdGhlIGxvd2VyIGJvdW5kIGZvciB0aGUgY28tb3JkaW5hdGVzXCIpLFxuICAgICAgIFwibWF4XCI6IEpvaS5udW1iZXIoKS5kZXNjcmlwdGlvbihcIkZvciBnZW9zcGF0aWFsIGluZGV4ZXMgc2V0IHRoZSBoaWdoIGJvdW5kIGZvciB0aGUgY28tb3JkaW5hdGVzXCIpLFxuICAgICAgIFwidlwiOiBKb2kubnVtYmVyKCkuZGVzY3JpcHRpb24oXCJTcGVjaWZ5IHRoZSBmb3JtYXQgdmVyc2lvbiBvZiB0aGUgaW5kZXhlc1wiKSxcbiAgICAgICBcImV4cGlyZUFmdGVyU2Vjb25kc1wiOiBKb2kubnVtYmVyKCkuZGVzY3JpcHRpb24oXCJBbGxvd3MgeW91IHRvIGV4cGlyZSBkYXRhIG9uIGluZGV4ZXMgYXBwbGllZCB0byBhIGRhdGEgKE1vbmdvREIgMi4yIG9yIGhpZ2hlcilcIilcbiAgICAgfSksXG4gICAgIFwiaW5kZXhLZXlzXCI6IEpvaS5hcnJheSgpLm1heCgzMSkuaXRlbXMoXG4gICAgICAgSm9pLm9iamVjdCgpLmtleXMoe1xuICAgICAgICAgXCJrZXlOYW1lXCI6IEpvaS5zdHJpbmcoKS5yZXF1aXJlZCgpLFxuICAgICAgICAgXCJrZXlTb3J0T3JkZXJcIjogSm9pLm51bWJlcigpLnZhbGlkKDEsIC0xKSxcbiAgICAgICAgIFwia2V5VHlwZVwiOiBKb2kuc3RyaW5nKCkudmFsaWQoXCJ0ZXh0XCIsIFwiMmRcIiwgXCIyZHNwaGVyZVwiLCBcImdlb0hheXN0YWNrXCIsIFwiaGFzaGVkXCIpXG4gICAgICAgfSkueG9yKFwia2V5U29ydE9yZGVyXCIsIFwia2V5VHlwZVwiKS5yZXF1aXJlZCgpXG4gICAgICkucmVxdWlyZWQoKVxuICAgfSlcbilcbiAgLmV4YW1wbGUoW3tcbiAgICBcImNvbGxlY3Rpb25OYW1lXCI6IFwiZGFzaGJvYXJkQXZhaWxhYmlsaXRpZXNcIixcbiAgICBcImluZGV4S2V5c1wiOiBbe1xuICAgICAgXCJrZXlOYW1lXCI6IFwicHJvcGVydHlJZFwiLFxuICAgICAgXCJrZXlTb3J0T3JkZXJcIjogMVxuICAgIH1dXG4gIH1dKTtcbiJdfQ==
+//# sourceMappingURL=indexListSchema.js.map
