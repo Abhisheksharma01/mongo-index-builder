@@ -2,7 +2,7 @@ import Q from "q";
 import * as Hoek from "hoek";
 import {indexListSchema, loggerSchema, mongoConfigSchema} from "./schema(s)";
 import ValidateSchema from "./validateSchema";
-import ThrowWrappedError from "./ThrowWrappedError";
+import ThrowWrappedError from "./throwWrappedError";
 import {getDbConnectionManager} from "./services/mongo-connection-factory";
 import MongodbClient from "./services/mongoService";
 import * as Mongodb from "mongodb";

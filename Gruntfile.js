@@ -69,6 +69,9 @@ module.exports = function (grunt) {
       "labquick": {
         "command": "./node_modules/.bin/lab --colors '<%= appConfig.testDist %>'"
       },
+      "labLocal": {
+        "command": "node node_modules/lab/bin/lab"
+      },
       "options": {
         "execOptions": {
           // This stops the "Warning: stdout maxBuffer exceeded" errors.
@@ -93,6 +96,12 @@ module.exports = function (grunt) {
     "build",
     "babel:test",
     "shell:lab"
+  ]);
+
+  grunt.registerTask("testLocal", [
+    "build",
+    "babel:test",
+    "shell:labLocal"
   ]);
 
   grunt.registerTask("quicktest", [
