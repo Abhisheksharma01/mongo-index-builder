@@ -29,7 +29,8 @@
     "index",
     "mongodb",
     "mongo",
-    "index creator"
+    "index creator",
+    "index builder"
   ],
   "license": "MIT",
   "devDependencies": {
