@@ -1,7 +1,6 @@
 # Index Builder
 
 [![Build Status](https://travis-ci.org/Abhisheksharma01/mongo-index-builder.svg?branch=master)](https://travis-ci.org/Abhisheksharma01/mongo-index-builder)
-
 [![Coverage Status](https://coveralls.io/repos/github/Abhisheksharma01/mongo-index-builder/badge.svg?branch=master)](https://coveralls.io/github/Abhisheksharma01/mongo-index-builder?branch=master)
 
 ## Problem Statement
