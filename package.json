@@ -7,7 +7,7 @@
   "srcDir": "lib",
   "testDist": "test",
   "testSrc": "test-lib",
-  "main": "dist/index.js",
+  "main": "dist/indexBuilder.js",
   "scripts": {
     "build": "grunt build",
     "test": "grunt test"
@@ -17,6 +17,7 @@
   },
   "files": [
     "dist",
+    "lib",
     "README.md",
     "package.json"
   ],

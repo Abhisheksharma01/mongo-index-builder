@@ -96,8 +96,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask("test", [
-    "build",
-    "babel:test",
     "shell:labCoveralls"
   ]);
 
