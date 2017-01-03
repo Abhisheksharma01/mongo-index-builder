@@ -27,6 +27,8 @@
 
 !["Index Builder Design"](./indexBuilder.jpg)
 
+## How to use it
+
 
 ## Things to consider
   - The indexes should only be built on Primary in case of replicaset
