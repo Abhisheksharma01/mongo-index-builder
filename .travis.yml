@@ -1,6 +1,10 @@
+before_script:
+  - npm install
 language: node_js
 node_js:
   - "4"
+  - "5"
+  - "6"
 script:
   - grunt build
   - grunt test
