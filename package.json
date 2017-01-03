@@ -2,6 +2,7 @@
   "name": "mongo-index-builder",
   "version": "1.0.0",
   "author": "Abhishek Sharma <abhishek.1196@gmail.com>",
+  "homepage": "https://github.com/Abhisheksharma01/mongo-index-builder#readme",
   "description": "This tool will help in syncronizing mongo db indexes.This is only applicable for standalone servers or replica sets.",
   "distDir": "dist",
   "srcDir": "lib",
@@ -9,11 +10,13 @@
   "testSrc": "test-lib",
   "main": "dist/indexBuilder.js",
   "scripts": {
+    "prepublish": "grunt buildAndTestLocal",
     "build": "grunt build",
     "test": "grunt test"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/Abhisheksharma01/mongo-index-builder.git"
   },
   "files": [
     "dist",

@@ -95,6 +95,14 @@ module.exports = function (grunt) {
     "babel:dist"
   ]);
 
+  grunt.registerTask("buildAndTestLocal", [
+    "clean",
+    "eslint",
+    "babel:dist",
+    "babel:test",
+    "shell:labLocal"
+  ]);
+
   grunt.registerTask("test", [
     "shell:labCoveralls"
   ]);
