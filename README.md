@@ -1,6 +1,4 @@
-# Index Builder
-[![Build Status](https://travis-ci.org/Abhisheksharma01/mongo-index-builder.svg?branch=master)](https://travis-ci.org/Abhisheksharma01/mongo-index-builder)
-[![Coverage Status](https://coveralls.io/repos/github/Abhisheksharma01/mongo-index-builder/badge.svg?branch=master)](https://coveralls.io/github/Abhisheksharma01/mongo-index-builder?branch=master)
+# Index Builder [![Build Status](https://travis-ci.org/Abhisheksharma01/mongo-index-builder.svg?branch=master)](https://travis-ci.org/Abhisheksharma01/mongo-index-builder) [![Coverage Status](https://coveralls.io/repos/github/Abhisheksharma01/mongo-index-builder/badge.svg?branch=master)](https://coveralls.io/github/Abhisheksharma01/mongo-index-builder?branch=master)
 
 > Mongo index builder will help in creating indexes as part of the application deployment and would help in creating a self contained package.Hence will facilitate the rollback or any build deployment without worrying for the compatible indexes.The package can list the compatible indexes and take use of index builder to process them at the time of deployment.Index builder will create/drop the indexes incremently without repeating the job.
 
