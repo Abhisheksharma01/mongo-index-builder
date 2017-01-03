@@ -95,12 +95,12 @@ module.exports = function (grunt) {
     "babel:dist"
   ]);
 
-  grunt.registerTask("buildAndTest", [
+  grunt.registerTask("buildAndTestLocal", [
     "clean",
     "eslint",
     "babel:dist",
     "babel:test",
-    "shell:labCoveralls"
+    "shell:labLocal"
   ]);
 
   grunt.registerTask("test", [

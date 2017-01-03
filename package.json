@@ -10,7 +10,7 @@
   "testSrc": "test-lib",
   "main": "dist/indexBuilder.js",
   "scripts": {
-    "prepublish": "grunt buildAndTest",
+    "prepublish": "grunt test",
     "build": "grunt build",
     "test": "grunt test"
   },
