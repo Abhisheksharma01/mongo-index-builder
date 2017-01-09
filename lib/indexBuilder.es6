@@ -94,11 +94,11 @@ export default class indexBuilderService {
         if (index.indexOptions) {
           Object.assign(indexOptions, index.indexOptions);
         }
-        this.eventEmitter.emit("indexCreate", `Keys : ${Hoek.stringify(indexKeys)}, Options : ${Hoek.stringify(indexOptions)}`);
+        this.eventEmitter.emit("indexCreate", `Collection Name : ${index.collectionName}, Keys : ${Hoek.stringify(indexKeys)}, Options : ${Hoek.stringify(indexOptions)}`);
 
         promise = promise
           .then(() => getPrivateHub(this).dataService.createIndex(index.collectionName, indexKeys, indexOptions))
-          .then(() => this.eventEmitter.emit("indexCreated", `Keys : ${Hoek.stringify(indexKeys)}, Options : ${Hoek.stringify(indexOptions)}`));
+          .then(() => this.eventEmitter.emit("indexCreated", `Collection Name : ${index.collectionName}, Keys : ${Hoek.stringify(indexKeys)}, Options : ${Hoek.stringify(indexOptions)}`));
       }
 
       return promise;
@@ -116,10 +116,10 @@ export default class indexBuilderService {
       for (const index of dropList) {
 
         if (index.indexName !== "_id_") {
-          this.eventEmitter.emit("indexDrop", index.indexName);
+          this.eventEmitter.emit("indexDrop", `Collection Name : ${index.collectionName}, "Index Name:" : ${index.indexName}`);
           promise = promise
             .then(() => getPrivateHub(this).dataService.dropIndex(index.collectionName, index.indexName))
-            .then(() => this.eventEmitter.emit("indexDropped", index.indexName));
+            .then(() => this.eventEmitter.emit("indexDropped", `Collection Name : ${index.collectionName}, "Index Name:" : ${index.indexName}`));
         }
       }
       return promise;
