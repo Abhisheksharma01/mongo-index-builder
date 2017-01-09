@@ -94,11 +94,11 @@ export default class indexBuilderService {
         if (index.indexOptions) {
           Object.assign(indexOptions, index.indexOptions);
         }
-        this.eventEmitter.emit(customEvents.indexEvents.indexCreate, `Keys : ${Hoek.stringify(indexKeys)}, Options : ${Hoek.stringify(indexOptions)}`);
+        this.eventEmitter.emit("indexCreate", `Keys : ${Hoek.stringify(indexKeys)}, Options : ${Hoek.stringify(indexOptions)}`);
 
         promise = promise
           .then(() => getPrivateHub(this).dataService.createIndex(index.collectionName, indexKeys, indexOptions))
-          .then(() => this.eventEmitter.emit(customEvents.indexEvents.indexCreated, `Keys : ${Hoek.stringify(indexKeys)}, Options : ${Hoek.stringify(indexOptions)}`));
+          .then(() => this.eventEmitter.emit("indexCreated", `Keys : ${Hoek.stringify(indexKeys)}, Options : ${Hoek.stringify(indexOptions)}`));
       }
 
       return promise;
@@ -116,10 +116,10 @@ export default class indexBuilderService {
       for (const index of dropList) {
 
         if (index.indexName !== "_id_") {
-          this.eventEmitter.emit(customEvents.indexEvents.indexDrop, index.indexName);
+          this.eventEmitter.emit("indexDrop", index.indexName);
           promise = promise
             .then(() => getPrivateHub(this).dataService.dropIndex(index.collectionName, index.indexName))
-            .then(() => this.eventEmitter.emit(customEvents.indexEvents.indexDropped, index.indexName));
+            .then(() => this.eventEmitter.emit("indexDropped", index.indexName));
         }
       }
       return promise;
@@ -169,7 +169,7 @@ export default class indexBuilderService {
     getPrivateHub(this).getCollectionNames = function (indexList) {
 
       const collectionList = Hoek.unique(indexList.map(index => index.collectionName));
-      this.eventEmitter.emit(customEvents.indexEvents.collectionNames, collectionList.join());
+      this.eventEmitter.emit("collectionNames", collectionList.join());
 
       return collectionList;
     }.bind(this);
@@ -215,6 +215,7 @@ export default class indexBuilderService {
         eventEmitter.on(eventName, info => {
 
           getPrivateHub(this).loggerService.info(eventsToRegister[eventName] + info);
+
         });
       });
     }.bind(this);
@@ -245,16 +246,19 @@ export default class indexBuilderService {
   buildIndexes(indexList) {
 
     try {
-      this.eventEmitter.emit(customEvents.indexEvents.IndexesSyncronisationStart, Hoek.stringify(new Date()));
+      this.eventEmitter.emit("indexesSyncronisationStart", Hoek.stringify(new Date()));
 
       return ValidateSchema(indexList, indexListSchema, "Schema validation failed")
         .then(validatedIndexList => Q.all(getPrivateHub(this).getIndexSyncPromises(validatedIndexList)))
         .then(() => getPrivateHub(this).dropIndexes(getPrivateHub(this).indexDropList))
         .then(() => getPrivateHub(this).createIndexes(getPrivateHub(this).indexCreateList))
-        .then(() => this.eventEmitter.emit(customEvents.indexEvents.IndexesSyncronised, Hoek.stringify(new Date())))
+        .then(() => {
+          this.eventEmitter.emit("indexesSyncronised", Hoek.stringify(new Date()));
+          return Promise.resolve(true);
+        })
         .catch(error => {
 
-          this.eventEmitter.emit(customEvents.indexEvents.Error, error.message);
+          this.eventEmitter.emit("error", error.message);
           return getPrivateHub(this).errorHandler(ThrowWrappedError(`Error in building indexes : ${error.message}`, error));
         });
     } catch (error) {
