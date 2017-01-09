@@ -115,12 +115,13 @@ export default class indexBuilderService {
 
       for (const index of dropList) {
 
-        this.eventEmitter.emit(customEvents.indexEvents.indexDrop, index.indexName);
-        promise = promise
-          .then(() => getPrivateHub(this).dataService.dropIndex(index.collectionName, index.indexName))
-          .then(() => this.eventEmitter.emit(customEvents.indexEvents.indexDropped, index.indexName));
+        if (index.indexName !== "_id_") {
+          this.eventEmitter.emit(customEvents.indexEvents.indexDrop, index.indexName);
+          promise = promise
+            .then(() => getPrivateHub(this).dataService.dropIndex(index.collectionName, index.indexName))
+            .then(() => this.eventEmitter.emit(customEvents.indexEvents.indexDropped, index.indexName));
+        }
       }
-
       return promise;
     }.bind(this);
 
