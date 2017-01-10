@@ -16,7 +16,8 @@ let defaultLoggerConfig = {
   "streams": [{
     "level": "trace",
     "stream": process.stdout
-  }]
+  }],
+  "name": "mongo-index-builder-logger"
 };
 // let internals;
 const map = new WeakMap();

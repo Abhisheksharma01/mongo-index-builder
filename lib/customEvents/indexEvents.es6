@@ -4,7 +4,7 @@ export const indexEvents = {
   "indexCreated": "Completed index creation For :",
   "indexDrop": "Starting index dropping For :",
   "indexDropped": "Completed index dropping For :",
-  "indexesSyncronised": "Index sync is completed.",
+  "indexesSyncronised": "Index syncronisation is completed.",
   "collectionNames": "List of collections to be built :",
   "indexList": "List of indexes to be created : ",
   "error": "Error in building indexes : "
