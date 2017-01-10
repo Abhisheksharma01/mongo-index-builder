@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-   The indexes are build separately from the consumer applications and so far the compatibility of indexes with it has been managed manually.
+   Normally the indexes are build separately from the consumer applications and so far the compatibility of indexes with it has been managed manually.
    which is error prone and it is being hard to manage the rollback or deployment of different version of the application across all the environment.
 
 
@@ -15,15 +15,109 @@
    will facilitate the rollback or any build deployment without worrying for the compatible indexes.
 
 
-## How to use it
+## How to use
 
-Soon to be added
+###To install **mongo-index-builder**
+```bash
+npm install mongo-index-builder --save
+```
+###To import **mongo-index-builder**
+```javascript
+var mongoIndexBuilder = require("mongo-index-builder");
+```
+### Working Sample written in es6
+ ```
+ import mongoIndexBuilder from "mongo-index-builder";
+ 
+ const mongoConfig = {
+   "connectionString": "mongodb://test:test@address:port/db",
+   "operationTimeout": 5000
+ };
+ const loggerConfig = {
+   "streams": [{
+     "level": "info",
+     "path": "./mongo-index-builder.log"
+   }],
+   "name": "My-logger"
+ };
+ const indexes = [
+   {
+     "collectionName": "TestMongoIndexer",
+     "indexName": "acss",
+     "indexKeys": [
+       {
+         "keyName": "a",
+         "keySortOrder": 1.0
+       }
+     ]
+   },
+   {
+     "collectionName": "TestMongoIndexer",
+     "indexName": "b",
+     "indexKeys": [
+       {
+         "keyName": "b",
+         "keySortOrder": 1.0
+       }
+     ]
+   },
+   {
+     "collectionName": "TestMongoIndexer2",
+     "indexName": "ba",
+     "indexKeys": [
+       {
+         "keyName": "ba",
+         "keySortOrder": 1.0
+       }
+     ]
+   }
+ 
+ ];
+ 
+ const MongoIndexBuilder = new mongoIndexBuilder({mongoConfig, loggerConfig});
+ 
+ MongoIndexBuilder.buildIndexes(indexes)
+ .then(response => {
+   console.log(response);
+ }
+ ).catch(error => console.log(error.message));
+ 
 
-## Various components
+ ```
+
+###The constructor Api
+```javascript
+const MongoIndexBuilder = new mongoIndexBuilder({ mongoConfig: mongoConfig, loggerConfig: loggerConfig });
+```
+- **mongoConfig** : Mongo Db config : Mandatory :
+   Mongo Config Structure and Example:
+     ```
+     {
+      	"connectionString": String().required().description("The mongo db connection string"),
+      	"operationTimeout": Number().description("The operation timeout for mongo operations.")
+      }).required().example({
+      	"connectionString": "mongo://userName:Password@address:port/db",
+      	"operationTimeout": 5000
+      }) 
+     } 
+     ```
+  
+- **loggerConfig** : Logger Config : Not Mandatory : [Please Refer Bunyan](https://github.com/trentm/node-bunyan)
+    
+    Logger Config Example : For more info refer above link
+          ```{
+            "streams": [{
+              "level": "fatal",
+              "stream": process.stdout
+            }],
+            "name": "My-logger"
+          ```})
+
+###API
   - The utility exposes a class "indexBuilderService" which would take in the mongo config and logger config for 
   its construction. And would provide the following :
-    - buildIndexes(indexList) : Function returning a promise for building the indexes
-      - Index List Structure and Example:
+    - **buildIndexes(indexList)** : Function returning a promise for building the indexes
+      - Index Array Structure and Example:
        ```
        [{
         	"collectionName": String().required(),
@@ -53,78 +147,33 @@ Soon to be added
         	}).xor("keySortOrder",
         	"keyType").required()).required()
         }]Example: [{
-        	"collectionName": "dashboardAvailabilities",
+        	"collectionName": "testCollection",
         	"indexKeys": [{
         		"keyName": "propertyId",
         		"keySortOrder": 1
         	}]
         }]
         ```
-    - eventEmitter : Event emitter to hook your own custom handlers or register more events.
+    - **eventEmitter** : Event emitter to hook your own custom handlers or register more events.
       - The list of predefined events is :
         ```
         {
-          "IndexesSyncronisationStart": "Index syncronisation started @ : ",
-          "indexCreate": "Starting index creation For :",
-          "indexCreated": "Completed index creation For :",
-          "indexDrop": "Starting index dropping For :",
-          "indexDropped": "Completed index dropping For :",
-          "IndexesSyncronised": "Index sync is completed.",
-          "collectionNames": "List of collections to be built :",
-          "indexList": "List of indexes to be created : ",
-          "Error": "Error in building indexes : "
+           "indexesSyncronisationStart": "Index syncronisation started @ : ",
+           "indexCreate": "Starting index creation For :",
+           "indexCreated": "Completed index creation For :",
+           "indexDrop": "Starting index dropping For :",
+           "indexDropped": "Completed index dropping For :",
+           "indexesSyncronised": "Index syncronisation is completed.",
+           "collectionNames": "List of collections to be built :",
+           "indexList": "List of indexes to be created : ",
+           "error": "Error in building indexes : "
         };
         ```
   - The utility also exposes a function to get singleton instance of the same class
-    - getIndexBuilder : Function takes in the same mongo and logger config.
+    - **getIndexBuilder({ mongoConfig: mongoConfig, loggerConfig: loggerConfig })** : Function takes in the same mongo and logger config.
   
-  - Mongo Config Structure and Example:
-   ```
-   {
-    	"connectionString": String().required().description("The mongo db connection string"),
-    	"operationTimeout": Number().description("The operation timeout for mongo operations.")
-    }).required().example({
-    	"connectionString": "mongo://userName:Password@address:port/db",
-    	"operationTimeout": 5000
-    }) 
-   } 
-   ```
-   - Logger Config :
-   ```
-   {
-        "streams": Array().items(
-          Object().keys({
-            "level": Alternatives().try(String().insensitive().valid([
-              "trace",
-              "debug",
-              "info",
-              "warn",
-              "error",
-              "fatal"
-            ]),
-              Number().valid(
-                10,
-                20,
-                30,
-                40,
-                50,
-                60
-              )
-            ).required(),
-            "stream": Any().required()
-          })
-        ).min(1).required(),
-        "name": String().required()
-      }).required()
-      .example({
-        "streams": [{
-          "level": "fatal",
-          "stream": process.stdout
-        }],
-        "name": "My-logger"
-      })
-   ```
-      
+
+  
 ## Basic design
 
 !["Index Builder Design"](./indexBuilder.jpg)

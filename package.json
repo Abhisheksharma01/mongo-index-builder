@@ -1,6 +1,6 @@
 {
   "name": "mongo-index-builder",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "author": "Abhishek Sharma <abhishek.1196@gmail.com>",
   "homepage": "https://github.com/Abhisheksharma01/mongo-index-builder#readme",
   "description": "This tool will help in syncronizing mongo db indexes.This is only applicable for standalone servers or replica sets.",
